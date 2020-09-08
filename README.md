@@ -10,3 +10,5 @@ Michael Zeno
 • Technologies Used ( .html , .css )
 
 • Ideas for future improvement (minimum of 3)
+	1. Assign a contact to each task.
+	2. Filter task list by contact. 

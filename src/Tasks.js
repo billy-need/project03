@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import './App.css';
 
 export default function Tasks() {
@@ -7,8 +7,12 @@ export default function Tasks() {
 
     const addTask = () => {
         console.log('Add task button clicked = ' + taskRef.current.value);
-        setTasks([...tasks, taskRef.current.value]);
+        setTasks([...tasks, {desc: taskRef.current.value, completed: false}]);
     }
+
+    useEffect( () => {
+        console.log('useEffect = ' + tasks);
+    }, [tasks]);
 
     return (
         <div>
@@ -27,8 +31,8 @@ export default function Tasks() {
                 <tbody>
                     <tr>
                         <td><input type="checkbox" /></td>
-                        <td>{tasks.map((value, index) => (
-                            <div key={index}>{value}</div>
+                        <td>{tasks.map((obj, index) => (
+                            <div key={index}>{obj.desc} | {(obj.completed)? "true" : "false"}</div>
                         ))}</td>
                         <td><button type="button" id="editBtn">Edit</button></td>
                         <td><button type="button" id="deleteBtn">X</button></td>
