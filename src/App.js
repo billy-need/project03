@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Nav from './Nav';
 import Home from './Home';
-import ToDos from './ToDos';
+import Tasks from './Tasks';
 import Contacts from './Contacts';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/todos" component={ToDos} />
+          <Route path="/tasks" component={Tasks} />
           <Route path="/contacts" component={Contacts} />
         </Switch>
       </div>

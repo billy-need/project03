@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css';
 
 export default function Contacts() {
-    const handleClick = () => {
-        console.log('Contact submit button clicked');
+    const saveContact = () => {
+        console.log('Contact save button clicked');
     }
 
     return (
@@ -14,7 +14,7 @@ export default function Contacts() {
                 <input id="lname" type="text" placeholder="Last Name" />
                 <input id="email" type="email" placeholder="Email" />
                 <input id="comment" type="text" placeholder="Comments (optional)" />
-                <button id="submitBtn" type="button" onClick={handleClick}>SAVE</button>
+                <button id="submitBtn" type="button" onClick={saveContact}>SAVE</button>
             </form>
         </div>
     )
