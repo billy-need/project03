@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react'
 import './App.css';
+import uuid from 'react-uuid'
 
 export default function Tasks() {
     const [tasks, setTasks] = useState([]);
@@ -7,7 +8,7 @@ export default function Tasks() {
 
     const addTask = () => {
         console.log('Add task button clicked = ' + taskRef.current.value);
-        setTasks([...tasks, {desc: taskRef.current.value, completed: false}]);
+        setTasks([...tasks, {id: uuid(), desc: taskRef.current.value, completed: false}]);
     }
 
     useEffect( () => {
@@ -32,7 +33,7 @@ export default function Tasks() {
                     <tr>
                         <td><input type="checkbox" /></td>
                         <td>{tasks.map((obj, index) => (
-                            <div key={index}>{obj.desc} | {(obj.completed)? "true" : "false"}</div>
+                            <div key={index}>{obj.id} | {obj.desc} | {(obj.completed)? "true" : "false"}</div>
                         ))}</td>
                         <td><button type="button" id="editBtn">Edit</button></td>
                         <td><button type="button" id="deleteBtn">X</button></td>
