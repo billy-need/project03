@@ -5,6 +5,7 @@ import uuid from 'react-uuid'
 export default function Tasks() {
     const [tasks, setTasks] = useState([]);
     const taskRef = useRef();
+    const activeRef = useRef();
 
     const addTask = () => {
         console.log('Add task button clicked = ' + taskRef.current.value);
