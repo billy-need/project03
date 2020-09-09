@@ -6,7 +6,7 @@ const tasksReducer = (state = [], action) => {
         case 'DELETE_TASK':
             return [...state.slice(0, action.index), ...state.slice(action.index + 1)];
         case 'SET_COMPLETE':
-            return [...state.tasks, action.task];
+            return [...state.tasks, !action.task.complete];
         default:
             return state;
     }
