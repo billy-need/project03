@@ -1,46 +1,39 @@
-import React, {useState, useRef, useEffect} from 'react'
-import './App.css';
+import React, { Component, createRef } from 'react'
+import TaskList from './TaskList';
 import uuid from 'react-uuid'
 
-export default function Tasks() {
-    const [tasks, setTasks] = useState([]);
-    const taskRef = useRef();
-    const activeRef = useRef();
+export default class Tasks extends Component {
+    constructor(props){
 
-    const addTask = () => {
-        console.log('Add task button clicked = ' + taskRef.current.value);
-        setTasks([...tasks, {id: uuid(), desc: taskRef.current.value, completed: false}]);
+        super(props);
+        console.log("called task contructor")
+
+        this.state ={
+            tasks : []
+        };
+
+        this.taskRef = createRef();
+
+        this.taskClick = () => {
+            this.setState({tasks: [...this.state.tasks, {id: uuid(), desc: this.taskRef.current.value, complete: false}]})
+        }
+
+  
     }
 
-    useEffect( () => {
-        console.log('useEffect = ' + tasks);
-    }, [tasks]);
+    componentDidUpdate(prevProps, prevState) {
+        console.log("componentDidUpdate called")
 
-    return (
-        <div>
-            <h1>Tasks</h1>
-            <form>
-                <input type="text" id="taskDesc" ref={taskRef} placeholder="Task..." />
-                <button type="button" id="taskBtn" onClick={addTask}>Add Task</button>
-            </form>
-            <label>Show:</label>
-            <ul id="filter">
-                <li><button type="button" id="taskAll">All</button></li>
-                <li><button type="button" id="taskIn">Incomplete</button></li>
-                <li><button type="button" id="taskCom">Complete</button></li>
-            </ul>
-            <table>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>{tasks.map((obj, index) => (
-                            <div key={index}>{obj.id} | {obj.desc} | {(obj.completed)? "true" : "false"}</div>
-                        ))}</td>
-                        <td><button type="button" id="editBtn">Edit</button></td>
-                        <td><button type="button" id="deleteBtn">X</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    )
+        console.log("componentDidUpdate: " + JSON.stringify(this.state.tasks))
+    }
+    
+    render() {
+        return (
+            <div>
+                <input type="text" ref={this.taskRef} placeholder="Task..." required/>
+                <button onClick={this.taskClick}>Add Task</button>
+                <TaskList tableName="Tasks" tasks={this.state.tasks} />
+            </div>
+        )
+    }
 }
