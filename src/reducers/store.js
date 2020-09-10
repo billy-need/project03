@@ -1,6 +1,6 @@
-import tasksReducer from './reducers/tasks';
-import contactsReducer from './reducers/contacts'
-import filterReducer from './reducers/filter'
+import tasksReducer from './tasks';
+import contactsReducer from './contacts'
+import filterReducer from './filter'
 import { combineReducers, createStore } from 'redux';
 
 

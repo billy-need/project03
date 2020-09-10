@@ -7,4 +7,5 @@ const filterReducer = (state = [], action) => { //notice default state is now an
         return state;
     }
   }
-  
+
+export default filterReducer;
