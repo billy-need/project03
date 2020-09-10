@@ -34,7 +34,7 @@ export default function Tasks() {
             <br />
             <div className="row justify-content-center">
                 <div className="input-group col-4">
-                    <input className="form-control" type="text" ref={taskRef} onKeyDown={(e) => keyPress(e)} placeholder="Task..." aria-label="Type task" required />
+                    <input className="form-control" type="text" ref={taskRef} onKeyDown={(e) => keyPress(e)} placeholder="New task..." aria-label="Type task" required />
                     <div className="input-group-append">
                         <button className="btn btn-success" onClick={addtaskClick}>Add Task</button>
                     </div>
