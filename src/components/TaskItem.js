@@ -5,9 +5,9 @@ import '../App.css';
 
 export default function TaskItem(props) {
     return (
-        <li>
+        <li id="taskItem">
             <CheckBox />
-            <span id="taskItem" >{props.desc}</span>
+            <span id="taskDesc" >{props.desc}</span>
             <DeleteBtn />
         </li>
     )

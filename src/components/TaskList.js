@@ -17,10 +17,17 @@ export default class TaskList extends Component {
             }
         })
 
-        return (
-            <ul>
-                {taskList}
-            </ul>
-        )
+        if (taskList.length > 0) {
+            return (
+                <ul>
+                    {taskList}
+                </ul>
+            )          
+        }
+        else {
+            return (
+                <h4>You have no tasks.</h4>
+            )          
+        }
     }
 }
