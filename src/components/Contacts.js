@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, { useRef, useState } from 'react'
 import '../App.css';
 
 export default function Contacts() {
@@ -21,8 +21,9 @@ export default function Contacts() {
     var commentRef = useRef();
 
     function contactClick() {
-        console.log(contactState.id+1 + ", " + fnameRef.current.value + ", " + lnameRef.current.value + ", " + emailRef.current.value + ", " + commentRef.current.value)
-        setState([...contactState, { id: contactState.id+1, fname: fnameRef.current.value, lname: lnameRef.current.value, email: emailRef.current.value, comment: commentRef.current.value }]);
+        
+        setState([...contactState, {id : contactState.id, fname: fnameRef.current.value, lname: lnameRef.current.value, email: emailRef.current.value, comment: commentRef.current.value }]);
+        console.log(contactState.id + ", " + fnameRef.current.value + ", " + lnameRef.current.value + ", " + emailRef.current.value + ", " + commentRef.current.value)
     }
 
     return (
@@ -58,10 +59,38 @@ export default function Contacts() {
                     </div>
                 </div>
                 <div className="form-group row justify-content-center">
-                        <button className="btn btn-success" id="submitBtn" type="button" onClick={contactClick}>SAVE</button>
+                    <button className="btn btn-success" id="submitBtn" type="button" onClick={contactClick}>SAVE</button>
                 </div>
             </form>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        contactState.map((element, index) => {
+                            return (
+                                <tr key={index + 1}>
+                                    <td>{index + 1}</td>
+                                    <td>{element.id}</td>
+                                    <td>{element.fname}</td>
+                                    <td>{element.lname}</td>
+                                    <td>{element.email}</td>
+                                    <td>{element.comment}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
         </div>
     )
 }
