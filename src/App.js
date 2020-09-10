@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Nav from './components/Nav';
 import Home from './components/Home';
-import Tasks from './components/Tasks_old2';
+import Tasks from './components/Tasks';
 import Contacts from './components/Contacts';
 
 function App() {
