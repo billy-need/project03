@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
-import Nav from './Nav';
-import Home from './Home';
-import Tasks from './Tasks';
-import Contacts from './Contacts';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import Tasks from './components/Tasks_old2';
+import Contacts from './components/Contacts';
 
 function App() {
 
@@ -14,8 +14,8 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/tasks" component={Tasks} />
-          <Route path="/contacts" component={Contacts} />
+          <Route path="/components/tasks" component={Tasks} />
+          <Route path="/components/contacts" component={Contacts} />
         </Switch>
       </div>
     </BrowserRouter>
