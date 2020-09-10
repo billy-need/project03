@@ -5,26 +5,34 @@ import FilterOptions from './FilterOptions'
 
 export default function Tasks() {
 
-    const [tasks, setTasks] = useState([]);
+    const [taskState, setState] = useState(
+        [
+            {
+                id : 100,
+                desc : '',
+                complete : false
+            }
+        ]
+    )
+    
     const taskRef = useRef();
-    const idRef = useRef();
 
     const addtaskClick = () => {
         console.log('Add task button clicked = ' + taskRef.current.value);
-        setTasks([...tasks, { id: 100, desc: taskRef.current.value, complete: false }]);
+        setState([...taskState, { id: taskState.id+1, desc: taskRef.current.value, complete: false }]);
     }
 
-    const keyPress = event => {
-        if (event.code === "Enter" || event.code === 13 || event.code === "NumpadEnter") {
+    const keyPress = (e) => {
+        if (e.code === "Enter" || e.keycode === 13 || e.code === "NumpadEnter") {
             console.log("Enter key was pressed. Run your function.");
             addtaskClick();
         }
     };
 
     useEffect(() => {
-        console.log('useEffect = ' + JSON.stringify(tasks));
+        console.log('useEffect = ' + JSON.stringify(taskState));
         // call the dispatch to update the store
-    }, [tasks]);
+    }, [taskState]);
 
     return (
         <div className="container">
@@ -48,7 +56,7 @@ export default function Tasks() {
             </div>
             <div className="row justify-content-center">
                 <div id="taskOutput">
-                    <TaskList tasks={tasks}/>
+                    <TaskList tasks={taskState}/>
                 </div>
             </div>
         </div>

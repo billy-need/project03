@@ -1,6 +1,4 @@
-import tasksReducer from './tasks';
-import contactsReducer from './contacts'
-import filterReducer from './filter'
+import { tasksReducer, contactsReducer, filterReducer }  from './reducers';
 import { combineReducers, createStore } from 'redux';
 
 
@@ -10,7 +8,10 @@ const reducer = combineReducers({
     filter : filterReducer
 })
 
-var store = createStore(reducer)
+var store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
 
 export default store;
 
