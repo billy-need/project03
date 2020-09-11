@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../App.css';
 
-export default class DeleteBtn extends Component {
-    constructor(props){
-        super(props)
-        this.state = {checked: false}
-        this.deleteClicked = this.deleteClicked.bind(this)
-    }
+export default function DeleteBtn() {
 
-    deleteClicked(event){
-        this.setState({}) // 
-    }
+    function deleteClicked(event){
 
-    render(){
-        return (
-            <button className="btn btn-danger" type = "button" onClick = {this.deleteClicked}>Delete</button>
-        )
-    }
+    };
+
+    return (
+        <div>
+            <button className="btn btn-danger" type = "button" onClick = {deleteClicked}>Delete</button>
+        </div>
+    )
 }

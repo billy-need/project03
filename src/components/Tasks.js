@@ -1,25 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TaskList from './TaskList';
 import '../App.css';
-import FilterOptions from './FilterOptions'
+import FilterOptions from './FilterOptions';
+import { uuid } from 'uuidv4';
+
 
 export default function Tasks() {
 
-    const [taskState, setState] = useState(
-        [
-            {
-                id : 100,
-                desc : '',
-                complete : false
-            }
-        ]
-    )
+    const [taskState, setState] = useState([])
     
     const taskRef = useRef();
+    let todoID = uuid();
 
     const addtaskClick = () => {
         console.log('Add task button clicked = ' + taskRef.current.value);
-        setState([...taskState, { id: taskState.id+1, desc: taskRef.current.value, complete: false }]);
+        setState([...taskState, { id: todoID, desc: taskRef.current.value, complete: false }]);
     }
 
     const keyPress = (e) => {

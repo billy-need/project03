@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 
-export default class CheckBox extends Component {
+export default function CheckBox() {
 
-    constructor(props){
-        super(props)
-        this.state = {checked: false}
-        this.handleChecked = this.handleChecked.bind(this)
+    const [checkboxState, setState] = useState([])
+
+    const checkboxRef = useRef();
+
+    const handleChecked = (e) => {
+        setState(e.target.value)
     }
 
-    handleChecked(event){
-        this.setState({checked: event.target.checked})
-    }
+    useEffect(() => {
+        console.log('filter set to = ' + JSON.stringify(checkboxState));
+    }, [checkboxState]);
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate: " + JSON.stringify(this.state.checked))
-    }
-
-    render(){
-        return (
-            <input type = "checkbox" checked = {this.state.checked} onChange = {this.handleChecked}/>
-        )
-    }
+    return (
+        <div>
+            <input type="checkbox" checked={checkboxState.checked} onChange={handleChecked} />
+        </div>
+    )
 }

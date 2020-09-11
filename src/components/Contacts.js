@@ -3,17 +3,7 @@ import '../App.css';
 
 export default function Contacts() {
 
-    const [contactState, setState] = useState(
-        [
-            {
-                id : 0,
-                fname : '',
-                lname : '',
-                email : '',
-                comment : ''
-            }
-        ]
-    )
+    const [contactState, setState] = useState([])
 
     var fnameRef = useRef();
     var lnameRef = useRef();
@@ -22,8 +12,8 @@ export default function Contacts() {
 
     function contactClick() {
         
-        setState([...contactState, {id : contactState.id, fname: fnameRef.current.value, lname: lnameRef.current.value, email: emailRef.current.value, comment: commentRef.current.value }]);
-        console.log(contactState.id + ", " + fnameRef.current.value + ", " + lnameRef.current.value + ", " + emailRef.current.value + ", " + commentRef.current.value)
+        setState([...contactState, {fname: fnameRef.current.value, lname: lnameRef.current.value, email: emailRef.current.value, comment: commentRef.current.value }]);
+        console.log("First Name: " + fnameRef.current.value + "\nLast Name:" + lnameRef.current.value + "\nEmail:" + emailRef.current.value + "\nComment:" + commentRef.current.value)
     }
 
     return (

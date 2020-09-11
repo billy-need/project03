@@ -1,33 +1,31 @@
+import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 import TaskItem from './TaskItem'
-import React, { Component } from 'react'
 
-export default class TaskList extends Component {
-    render() {
+export default function TaskList(props) {
 
-        var taskList = this.props.tasks.map((item, index) => {
-            if (item.complete === false) {
-                return <TaskItem key={item.id+1} desc={item.desc}/>
-            }
-            else if (item.complete === true) {
-                return <TaskItem key={item.id+1} desc={item.desc}/>
-            }
-            else {
-                return <TaskItem key={item.id+1} desc={item.desc}/>
-            }
-        })
-
-        if (taskList.length > 0) {
-            return (
-                <ul>
-                    {taskList}
-                </ul>
-            )          
+    var taskList = props.tasks.map((item, index) => {
+        if (item.complete === false) {
+            return <TaskItem key={index} desc={item.desc}/>
+        }
+        else if (item.complete === true) {
+            return <TaskItem key={index} desc={item.desc}/>
         }
         else {
-            return (
-                <h4>You have no tasks.</h4>
-            )          
+            return <TaskItem key={index} desc={item.desc}/>
         }
+    })
+
+    if (taskList.length > 0) {
+        return (
+            <ul>
+                {taskList}
+            </ul>
+        )          
+    }
+    else {
+        return (
+            <h4>You have no tasks.</h4>
+        )          
     }
 }

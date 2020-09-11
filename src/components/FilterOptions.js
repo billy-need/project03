@@ -1,29 +1,26 @@
-import React, { Component } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 
-export default class FilterOptions extends Component {
+export default function FilterOptions() {
 
-    constructor(props) {
-        super(props)
-        this.state = { value: 'all' }
-        this.filterChange = this.filterChange.bind(this)
-    }
-    filterChange(event) {
-        this.setState({ value: event.target.value })
-        
+    const [filterState, setState] = useState([])
+
+    const filterRef = useRef();
+
+    const filterChange = (e) => {
+        setState(e.target.value)
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log("componentDidUpdate: " + JSON.stringify(this.state.value))
-    }
+    useEffect(() => {
+        console.log('filter set to = ' + JSON.stringify(filterState));
+    }, [filterState]);
 
-    render() {
-        return (
-            <select className="custom-select mr-sm-2" id="filter" value={this.state.value} onChange={this.filterChange}>
-                <option value="all">All</option>
-                <option value="active" >Active</option>
-                <option value="completed" >Completed</option>
-            </select>
-        )
-    }
+    return (
+        <select className="custom-select mr-sm-2" id="filter" value={filterRef} onChange={filterChange}>
+            <option value="all">All</option>
+            <option value="active" >Active</option>
+            <option value="completed" >Completed</option>
+        </select>
+    )
 }
+
