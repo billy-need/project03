@@ -17,7 +17,7 @@ export default function FilterOptions() {
 
     return (
         <select className="custom-select mr-sm-2" id="filter" value={filterRef} onChange={filterChange}>
-            <option value="all">All</option>
+            <option value="all" defaultValue>All</option>
             <option value="active" >Active</option>
             <option value="completed" >Completed</option>
         </select>

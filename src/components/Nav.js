@@ -1,16 +1,34 @@
-import React from 'react'
+import React from 'react';
 import '../App.css';
-import {Link} from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
+
+    const logo = require('../logo.png')
+
     return (
-        <nav>
-            <h2>Daily Planner</h2>
-            <ul className="nav justify-content-center">
-                <Link style={{textDecoration: 'none'}} to="/"><li className="nav-item nav-link active">Home</li></Link>
-                <Link style={{textDecoration: 'none'}} to="/components/tasks"><li className="nav-item nav-link">Tasks</li></Link>
-                <Link style={{textDecoration: 'none'}} to="/components/contacts"><li className="nav-item nav-link">Contacts</li></Link>
-            </ul>
+        <nav className="navbar navbar-expand-lg">
+            <span className="navbar-brand">
+                <img src={logo} width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy"></img>
+                <span className="mb-0 h1">Daily Planner</span>
+            </span>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarToggler">
+                <ul className="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <NavLink exact className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/">Home</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/tasks">Tasks</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contacts">Contacts</NavLink>
+                    </li>
+                </ul>
+            </div>
         </nav>
     )
 }
+

@@ -1,21 +1,36 @@
 nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   min-height: 15vh;
   background: rgb(91, 179, 167);
   font-family: 'Roboto Slab', serif;
 }
 
-.nav-links {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+  color: rgb(5, 151, 5);
+} 
+
+.active {
+  color: darkgreen !important
 }
 
 .nav-item {
   font-size: 1.5rem;
 }
+
+/* Set the border color */ 
+          
+.navbar-toggler { 
+  border-color: darkgreen; 
+} 
+/* Setting the stroke to green using rgb values (0, 128, 0) */ 
+
+.navbar-toggler-icon { 
+  background-image: url( 
+"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 128, 0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); 
+} 
 
 .row {
   padding: 1rem;
@@ -50,4 +65,27 @@ ul {
 #taskOutput {
   display: flex;
   margin: 5rem;
+}
+
+
+#required {
+  color: red;
+}
+
+@media only screen and (max-width: 47.9375em) {
+  .mediaImg {
+    margin-top: 35px;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .mediaImg {
+    margin-top: 25px;
+  }
+}
+
+@media only screen and (min-width: 62em) {
+  .mediaImg {
+    margin-top: 15px;
+  }
 }

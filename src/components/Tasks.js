@@ -1,58 +1,86 @@
 import React, { useState, useRef, useEffect } from 'react'
-import TaskList from './TaskList';
 import '../App.css';
-import FilterOptions from './FilterOptions';
 import { uuid } from 'uuidv4';
 
 
 export default function Tasks() {
 
+    // task {
+    //     id: uuid(),
+    //     desc: string,
+    //     complete: boolean
+    // }
+
+    //[value, setterFunction] = React.useState(initialValue);
     const [taskState, setState] = useState([])
-    
+
+
     const taskRef = useRef();
+
+
+
     let todoID = uuid();
 
     const addtaskClick = () => {
-        console.log('Add task button clicked = ' + taskRef.current.value);
-        setState([...taskState, { id: todoID, desc: taskRef.current.value, complete: false }]);
+        if (taskRef.current.value !== '') {
+            //console.log('Add task button clicked = ' + taskRef.current.value);
+            setState([...taskState, { id: todoID, desc: taskRef.current.value, complete: false }]);
+            taskRef.current.value = '';
+        }
+        else {
+            alert("Please enter a task")
+        }
     }
 
-    const keyPress = (e) => {
-        if (e.code === "Enter" || e.keycode === 13 || e.code === "NumpadEnter") {
-            console.log("Enter key was pressed. Run your function.");
-            addtaskClick();
-        }
-    };
+    const Checkbox = (task, index) => (
+        (task.complete) ?
+            (<input type="checkbox" onClick={(e) => handleChecked(e, index)} value={task.desc} defaultChecked />) :
+            (<input type="checkbox" onClick={(e) => handleChecked(e, index)} value={task.desc} />))
+
+    const handleChecked = (e, index) => {
+        const tempState = [...taskState];
+        tempState[index] = { desc: taskState[index].desc, complete: !taskState[index].complete }
+        setState(tempState);
+    }
+
+    const handleDelete = (taskId) => {
+        console.log("DELETE taskId=" + taskId);
+        let tempState = taskState.filter(task => task.id !== taskId);
+        setState(tempState);
+    }
 
     useEffect(() => {
-        console.log('useEffect = ' + JSON.stringify(taskState));
+        console.log('USEEFFECT() taskState = ' + JSON.stringify(taskState));
+
         // call the dispatch to update the store
+        
     }, [taskState]);
 
+
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            addtaskClick();
+        }
+    }
+
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <h1>Tasks</h1>
+        <div id="taskForm" className="container">
+            <div>
+                <input type="text" ref={taskRef} onKeyDown={handleKeyDown} placeholder="New task..." />
+                <button onClick={addtaskClick}>Add Task</button>
             </div>
             <br />
-            <div className="row justify-content-center">
-                <div className="input-group col-4">
-                    <input className="form-control" type="text" ref={taskRef} onKeyDown={(e) => keyPress(e)} placeholder="New task..." aria-label="Type task" required />
-                    <div className="input-group-append">
-                        <button className="btn btn-success" onClick={addtaskClick}>Add Task</button>
-                    </div>
-                </div>
-            </div>
-            <div className="row justify-content-center">
-                <div className="col-4 form-inline">
-                    <label className="my-1 mr-2">Show:</label>
-                    <FilterOptions />
-                </div>
-            </div>
-            <div className="row justify-content-center">
-                <div id="taskOutput">
-                    <TaskList tasks={taskState}/>
-                </div>
+            <div>
+                {
+                    taskState.map((task, index) => {
+                        return <div key={index} id={task.id}>
+                            {Checkbox(task, index)}
+                            <span style={{ textDecoration: task.complete ? 'line-through' : 'none' }}><h5>{task.desc}</h5></span>
+                            <button className="btn btn-danger" type="button" onClick={() => handleDelete(task.id)}>Delete</button>
+                        </div>
+                    })
+                }
             </div>
         </div>
     )
