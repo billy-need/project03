@@ -16,7 +16,7 @@ export default function Nav() {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarToggler">
-                <ul className="navbar-nav ml-auto">
+                <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <NavLink exact className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/">Home</NavLink>
                     </li>

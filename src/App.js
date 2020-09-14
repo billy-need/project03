@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import Tasks from './components/Tasks';
 import Contacts from './components/Contacts';
+import ContactList from './components/ContactList';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/components/tasks" component={Tasks} />
           <Route path="/components/contacts" component={Contacts} />
+          <Route path="/components/contactlist" component={ContactList} />
         </Switch>
       </div>
     </BrowserRouter>
