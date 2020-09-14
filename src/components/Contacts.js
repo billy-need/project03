@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Contacts() {
 
-    const [contactState, setState] = useState([])
+    const [contactState, setState] = useState([]);
 
     var fnameRef = useRef();
     var lnameRef = useRef();

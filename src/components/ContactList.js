@@ -2,7 +2,12 @@ import React from 'react';
 import '../App.css';
 import { NavLink } from 'react-router-dom';
 
-export default function ContactList(props) {
+export default function ContactList() {
+
+    // assign contacts to contactState
+    var contacts = [{ fname: "David", lname: "Smith", email: "dsmith@email.com", comment: "Dave''s mobile: 555-523-7456" },
+    { fname: "Mary", lname: "Klien", email: "mary34@email.com", comment: "Help her with project" },
+    { fname: "Frank", lname: "McDonald", email: "frankmac@email.com", comment: "home address - 123 main st. happytown, usa" }];
 
     return (
         <div className="container">
@@ -21,40 +26,38 @@ export default function ContactList(props) {
             <hr />
             <br />
             {
-                (props) => {
-                    if (props.length === 0) {
+                (contacts) => {
+                    if (contacts.length === 0) {
                         return <h5>You have no contacts yet</h5>
                     }
                     else {
-                        return (
-                            <table className="table">
-                                <thead className="thead-light">
-                                    <tr>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Comment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        props.contactState.map((contact, index) => {
-                                            return (
-                                                <tr scope="row" key={index} id={contact.id}>
-                                                    <td>{contact.fname}</td>
-                                                    <td>{contact.lname}</td>
-                                                    <td>{contact.email}</td>
-                                                    <td>{contact.comment}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        )
+
+                        <table className="table">
+                            <thead className="thead-light">
+                                <tr>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    contacts.map((contact, index) => {
+                                        return (
+                                            <tr scope="row" key={index} id={contact.id}>
+                                                <td>{contact.fname}</td>
+                                                <td>{contact.lname}</td>
+                                                <td>{contact.email}</td>
+                                                <td>{contact.comment}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
                     }
                 }
-
             }
         </div>
     )

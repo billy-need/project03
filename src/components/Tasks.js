@@ -6,8 +6,8 @@ import { uuid } from 'uuidv4';
 export default function Tasks() {
 
     // local states
-    const [taskState, setState] = useState([])
-    const [filterState, setFilter] = useState([])
+    const [taskState, setState] = useState([]);
+    const [filterState, setFilter] = useState([]);
 
     // variables
     const taskRef = useRef();
@@ -53,7 +53,7 @@ export default function Tasks() {
     // mark checked task as completed
     const handleChecked = (e, index) => {
         const tempState = [...taskState];
-        tempState[index] = { id: taskState[index].id, desc: taskState[index].desc, complete: !taskState[index].complete }
+        tempState[index] = { id: taskState[index].id, desc: taskState[index].desc, complete: !taskState[index].complete };
         setState(tempState);
     }
 
@@ -67,7 +67,7 @@ export default function Tasks() {
     // state hooks
     useEffect(() => {
         console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
-        setFilter(taskState)
+        setFilter(taskState);
     }, [taskState]);
 
     useEffect(() => {
