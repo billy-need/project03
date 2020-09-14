@@ -76,32 +76,50 @@ export default function Tasks() {
 
 
     return (
-        <div id="taskForm" className="container">
+        <div className="container">
             <div className="row justify-content-center">
                 <h1>Tasks</h1>
             </div>
             <br />
-            <div>
-                <input type="text" ref={taskRef} onKeyDown={handleKeyDown} placeholder="New task..." />
-                <button onClick={addTask}>Add Task</button>
-            </div>
-            <br />
-            <label className="my-1 mr-2">Show:</label>
-            <select className="custom-select mr-sm-2" id="filter" value={filterState.complete} onChange={filterTasks}>
-                <option value="all" >All</option>
-                <option value="active" >Active</option>
-                <option value="complete">Completed</option>
-            </select>
-            <div>
-                {
-                    filterState.map((task, index) => {
-                        return <div key={index} id={task.id}>
-                            {checkbox(task, index)}
-                            <span style={{ textDecoration: task.complete ? 'line-through' : 'none' }}><h5>{task.desc}</h5></span>
-                            <button className="btn btn-danger" type="button" onClick={() => handleDelete(task.id)}>Delete</button>
+            <div className="form-row">
+                <div className="form-group col-md-8">
+                    <div className="input-group">
+                        <input id="taskInput" className="form-control" type="text" placeholder="New task..." aria-label="Type task" ref={taskRef} onKeyDown={handleKeyDown} />
+                        <div className="input-group-append">
+                            <button className="btn btn-success" onClick={addTask}>Add Task</button>
                         </div>
-                    })
-                }
+                    </div>
+                </div>
+                <div className="form-group col-md-4">
+                    <select className="custom-select mr-sm-2 form-control" id="filter" value={filterState.complete} onChange={filterTasks}>
+                        <option value="all" >All</option>
+                        <option value="active" >Active</option>
+                        <option value="complete">Completed</option>
+                    </select>
+                </div>
+            </div>
+            <hr/>
+            <div id="content-wrap">
+                <div id="taskOutput" className="form-row">
+                    <div className="form-group col-md-12">
+                        {
+                            filterState.map((task, index) => {
+                                return <div className="input-group mb-3" key={index} id={task.id}>
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            {checkbox(task, index)}
+                                        </div>
+                                    </div>
+
+                                    <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
+                                    <div className="input-group-append">
+                                        <button className="btn btn-outline-danger" type="button" onClick={() => handleDelete(task.id)}>Delete</button>
+                                    </div>
+                                </div>
+                            })
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )

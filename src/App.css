@@ -2,6 +2,23 @@ nav {
   min-height: 15vh;
   background: rgb(91, 179, 167);
   font-family: 'Roboto Slab', serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Navigation */
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 5rem;
+  position: relative;
 }
 
 .nav-link {
@@ -19,13 +36,10 @@ nav {
 .nav-item {
   font-size: 1.5rem;
 }
-
-/* Set the border color */ 
           
 .navbar-toggler { 
   border-color: darkgreen; 
 } 
-/* Setting the stroke to green using rgb values (0, 128, 0) */ 
 
 .navbar-toggler-icon { 
   background-image: url( 
@@ -88,4 +102,34 @@ ul {
   .mediaImg {
     margin-top: 15px;
   }
+}
+
+.plane {
+  border: none;
+}
+
+/* #content-wrap {
+  background: rgb(91, 179, 167);
+  display: flex;
+  width: 100%;
+} */
+
+.jumbotron {
+  background-color: white;
+}
+
+.navbar-nav.navbar-center { 
+  position: absolute; 
+  left: 50%; 
+  transform: translatex(-50%); 
+} 
+
+/* .nav-pills .nav-link {
+  border: .25px black solid;
+} */
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: white;
+  font-weight: bold;
 }
