@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
+import { useSelector } from 'react-redux'
+import { tasksReducer, filterReducer } from '../redux/reducers';
 
 
 export default function Tasks() {
@@ -8,6 +10,10 @@ export default function Tasks() {
     // local states
     const [taskState, setState] = useState([]);
     const [filterState, setFilter] = useState([]);
+
+    // store selectors
+    var tasks = useSelector( state => state.tasks)
+    var filter = useSelector( state => state.filter)
 
     // variables
     const taskRef = useRef();
@@ -110,7 +116,6 @@ export default function Tasks() {
                                             {checkbox(task, index)}
                                         </div>
                                     </div>
-
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
                                     <div className="input-group-append">
                                         <button className="btn btn-outline-danger" type="button" onClick={() => handleDelete(task.id)}>Delete</button>

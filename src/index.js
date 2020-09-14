@@ -3,16 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { combineReducers, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import { tasksReducer, contactsReducer, filterReducer } from './redux/reducers';
+import { reducer } from './redux/reducers';
 
-
-const reducer = combineReducers({
-  tasks: tasksReducer,
-  contacts: contactsReducer,
-  filter: filterReducer
-})
 
 var store = createStore(
   reducer,

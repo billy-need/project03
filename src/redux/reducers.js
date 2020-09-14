@@ -1,4 +1,5 @@
-import {ADD_TASK, COMPLETE_TASK, DELETE_TASK, SET_FILTER, ADD_CONTACT } from './actionTypes'
+import { ADD_TASK, COMPLETE_TASK, DELETE_TASK, SET_FILTER, ADD_CONTACT } from './actionTypes'
+import { combineReducers } from 'redux';
 
 //tasks reducer
 export const tasksReducer = (state = [], action) => {
@@ -26,10 +27,17 @@ export const contactsReducer = (state = [], action) => {
 
 //filter reducer
 export const filterReducer = (state = [], action) => { //notice default state is now an array 
-    switch(action.type){
-      case SET_FILTER:
-        return action.filter;
-      default:
-        return state;
+    switch (action.type) {
+        case SET_FILTER:
+            return action.filter;
+        default:
+            return state;
     }
-  }
+}
+
+//combined reducer
+export const reducer = combineReducers({
+    tasks: tasksReducer,
+    contacts: contactsReducer,
+    filter: filterReducer
+})

@@ -20,7 +20,6 @@ export const completeTask = (id) => {
     }
 }
 
-
 //DELETE_TASK
 export const deleteTask = (id) => {
     return {
