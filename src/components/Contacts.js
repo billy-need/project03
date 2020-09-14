@@ -34,11 +34,11 @@ export default function Contacts() {
                 <h1>Contacts</h1>
             </div>
             <br />
-            <ul class="nav nav-pills nav-fill">
-                <li class="nav-item">
+            <ul className="nav nav-pills nav-fill">
+                <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contacts">New Contact</NavLink>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contactlist">Contact List</NavLink>
                 </li>
             </ul>
@@ -72,32 +72,6 @@ export default function Contacts() {
                     </div>
                 </div>
             </form>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Index</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Comment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        contactState.map((e, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{e.fname}</td>
-                                    <td>{e.lname}</td>
-                                    <td>{e.email}</td>
-                                    <td>{e.comment}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
         </div>
     )
 }

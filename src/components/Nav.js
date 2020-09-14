@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
 
-    const logo = require('../images/logo.png')
+    const logo = require('../images/logo.png');
 
     return (
+        // site navigation
         <nav className="navbar navbar-expand-lg">
             <span className="navbar-brand">
                 <img src={logo} width="50" height="50" className="d-inline-block align-top" alt="" loading="lazy"></img>
