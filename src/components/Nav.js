@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
 
-    const logo = require('../logo.png')
+    const logo = require('../images/logo.png')
 
     return (
         <nav className="navbar navbar-expand-lg">
