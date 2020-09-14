@@ -25,40 +25,30 @@ export default function ContactList() {
             </ul>
             <hr />
             <br />
-            {
-                (contacts) => {
-                    if (contacts.length === 0) {
-                        return <h5>You have no contacts yet</h5>
-                    }
-                    else {
-
-                        <table className="table">
-                            <thead className="thead-light">
-                                <tr>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Comment</th>
+            <table className="table">
+                <thead className="thead-light">
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        contacts.map((contact, index) => {
+                            return (
+                                <tr scope="row" key={index} id={contact.id}>
+                                    <td>{contact.fname}</td>
+                                    <td>{contact.lname}</td>
+                                    <td>{contact.email}</td>
+                                    <td>{contact.comment}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    contacts.map((contact, index) => {
-                                        return (
-                                            <tr scope="row" key={index} id={contact.id}>
-                                                <td>{contact.fname}</td>
-                                                <td>{contact.lname}</td>
-                                                <td>{contact.email}</td>
-                                                <td>{contact.comment}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+                            )
+                        })
                     }
-                }
-            }
+                </tbody>
+            </table>
         </div>
     )
 }
