@@ -42,6 +42,7 @@ export default function Contacts() {
                 <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contactlist">Contact List</NavLink>
                 </li>
             </ul>
+            <hr />
             <br />
             <form>
                 <div className="form-row">
