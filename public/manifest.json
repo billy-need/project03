@@ -1,5 +1,5 @@
 {
-  "short_name": "Task App",
+  "short_name": "React App",
   "name": "Create React App Sample",
   "icons": [
     {
@@ -8,9 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "checkmark_logo.png",
+      "src": "android-chrome-192x192.png",
       "type": "image/png",
-      "sizes": "30x30"
+      "sizes": "192x192"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
