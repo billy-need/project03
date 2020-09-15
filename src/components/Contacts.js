@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
-import { NavLink } from 'react-router-dom';
+import ContactNav from './ContactNav';
 
 export default function Contacts() {
 
@@ -30,19 +30,7 @@ export default function Contacts() {
     return (
         // New Contact Form
         <div className="container">
-            <div className="row justify-content-center">
-                <h1>Contacts</h1>
-            </div>
-            <br />
-            <ul className="nav nav-pills nav-fill">
-                <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contacts">New Contact</NavLink>
-                </li>
-                <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contactlist">Contact List</NavLink>
-                </li>
-            </ul>
-            <hr />
+            <ContactNav />
             <br />
             <form>
                 <div className="form-row">

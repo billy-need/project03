@@ -1,30 +1,25 @@
 import React from 'react';
 import '../App.css';
-import { NavLink } from 'react-router-dom';
+import ContactNav from './ContactNav';
+
 
 export default function ContactList() {
 
     // assign contacts to contactState
-    var contacts = [{ fname: "David", lname: "Smith", email: "dsmith@email.com", comment: "Dave''s mobile: 555-523-7456" },
+    var contactState = [{ fname: "David", lname: "Smith", email: "dsmith@email.com", comment: "Dave''s mobile: 555-523-7456" },
     { fname: "Mary", lname: "Klien", email: "mary34@email.com", comment: "Help her with project" },
     { fname: "Frank", lname: "McDonald", email: "frankmac@email.com", comment: "home address - 123 main st. happytown, usa" }];
 
-    return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <h1>Contacts</h1>
-            </div>
-            <br />
-            <ul className="nav nav-pills nav-fill">
-                <li className="nav-item">
-                    <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contacts">New Contact</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" activeClassName="active" style={{ textDecoration: 'none' }} to="/components/contactlist">Contact List</NavLink>
-                </li>
-            </ul>
-            <hr />
-            <br />
+    function contactTable(contacts) {
+        if (contacts.length === 0) {
+            return (
+                <div className="row justify-content-center">
+                    <h5>You have no contacts yet.</h5> 
+                </div>
+            )
+        }
+        else {
+            return (
             <table className="table">
                 <thead className="thead-light">
                     <tr>
@@ -38,7 +33,7 @@ export default function ContactList() {
                     {
                         contacts.map((contact, index) => {
                             return (
-                                <tr scope="row" key={index} id={contact.id}>
+                                <tr key={index} id={contact.id}>
                                     <td>{contact.fname}</td>
                                     <td>{contact.lname}</td>
                                     <td>{contact.email}</td>
@@ -49,6 +44,15 @@ export default function ContactList() {
                     }
                 </tbody>
             </table>
+            )
+        }
+    }
+
+    return (
+        <div className="container">
+            <ContactNav />
+            <br />
+            {contactTable(contactState)}
         </div>
     )
 }
