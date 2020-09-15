@@ -1,19 +1,31 @@
 import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { tasksReducer, filterReducer } from '../redux/reducers';
 
 
 export default function Tasks() {
 
+    // store selectors and dispatch
+    const tasks = useSelector(state => state.tasks)
+    const filter = useSelector(state => state.filter)
+    
+
+
     // local states
     const [taskState, setState] = useState([]);
     const [filterState, setFilter] = useState([]);
 
-    // store selectors
-    var tasks = useSelector( state => state.tasks)
-    var filter = useSelector( state => state.filter)
+    // state hooks
+    useEffect(() => {
+        console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
+        setFilter(taskState);
+    }, [taskState]);
+
+    useEffect(() => {
+        console.log('USEEFFECT() filter state = ' + JSON.stringify(filterState));
+    }, [filterState]);
 
     // variables
     const taskRef = useRef();
@@ -70,17 +82,6 @@ export default function Tasks() {
         setState(tempState);
     }
 
-    // state hooks
-    useEffect(() => {
-        console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
-        setFilter(taskState);
-    }, [taskState]);
-
-    useEffect(() => {
-        console.log('USEEFFECT() filter state = ' + JSON.stringify(filterState));
-    }, [filterState]);
-
-
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -104,7 +105,7 @@ export default function Tasks() {
                     </select>
                 </div>
             </div>
-            <hr/>
+            <hr />
             <div id="content-wrap">
                 <div id="taskOutput" className="form-row">
                     <div className="form-group col-md-12">
