@@ -3,14 +3,15 @@ import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
 import { tasksReducer, filterReducer } from '../redux/reducers';
+import { addTask } from '../redux/actions';
 
 
 export default function Tasks() {
 
     // store selectors and dispatch
-    const tasks = useSelector(state => state.tasks)
-    const filter = useSelector(state => state.filter)
-    
+    const tasks = useSelector(state => state.tasks);
+    const filter = useSelector(state => state.filter);
+    const dispatch = useDispatch();
 
 
     // local states
@@ -48,6 +49,7 @@ export default function Tasks() {
         if (taskRef.current.value !== '') {
             setState([...taskState, { id: todoID, desc: taskRef.current.value, complete: false }]);
             taskRef.current.value = '';
+            dispatch(addTask())
         }
         else {
             alert("Please enter a task")

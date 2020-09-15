@@ -26,10 +26,10 @@ export const contactsReducer = (state = [], action) => {
 }
 
 //filter reducer
-export const filterReducer = (state = [], action) => { //notice default state is now an array 
+export const filterReducer = (state = [], action) => {
     switch (action.type) {
         case SET_FILTER:
-            return action.filter;
+            return [...state.taskFilter, action.taskFilter];
         default:
             return state;
     }
@@ -39,5 +39,5 @@ export const filterReducer = (state = [], action) => { //notice default state is
 export const reducer = combineReducers({
     tasks: tasksReducer,
     contacts: contactsReducer,
-    filter: filterReducer
+    taskFilter: filterReducer
 })
