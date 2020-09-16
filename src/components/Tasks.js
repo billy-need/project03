@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, deleteTask, completeTask, setFilter } from '../redux/actions';
+import { addTask, completeTask, setFilter } from '../redux/actions';
 import DeleteBtn from './DeleteBtn';
+import Checkbox from './Checkbox';
 
 
 export default function Tasks() {
@@ -20,7 +21,7 @@ export default function Tasks() {
     // use effects
     useEffect(() => {
         console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
-        setFilter(taskState); //this could be an issue with filter
+        //setFilter(taskState); //this could be an issue with filter
     }, [taskState]);
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function Tasks() {
 
     // variables
     const taskRef = useRef();
-    
+
 
     // filter task list
     const filterTasks = (e) => {
@@ -46,7 +47,7 @@ export default function Tasks() {
     // handle add new task
     const taskClick = () => {
         let todoID = uuid();
-        
+
         if (taskRef.current.value !== '') {
             let task = { id: todoID, desc: taskRef.current.value, complete: false }
             dispatch(addTask(task));
@@ -63,21 +64,6 @@ export default function Tasks() {
         if (e.key === 'Enter') {
             taskClick();
         }
-    }
-
-    // checkbox element condidtional
-    const checkbox = (task, taskId) => (
-        (task.complete) ?
-            (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} defaultChecked />) :
-            (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} />)
-    )
-
-    // mark checked task as completed
-    const handleChecked = (taskId) => {
-        const tempState = [...taskState];
-        const index = taskState.findIndex(task => task.id === taskId);
-        tempState[index] = { id: taskState[index].id, desc: taskState[index].desc, complete: !taskState[index].complete };
-        setState(tempState);
     }
 
     return (
@@ -110,11 +96,7 @@ export default function Tasks() {
                         {
                             tasks.map((task, index) => {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            {checkbox(task, task.id)}
-                                        </div>
-                                    </div>
+                                    <Checkbox task={task} id={task.id} />
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
                                     <DeleteBtn id={task.id} />
                                 </div>
