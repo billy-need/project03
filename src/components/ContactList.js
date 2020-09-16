@@ -1,14 +1,12 @@
 import React from 'react';
 import '../App.css';
 import ContactNav from './ContactNav';
-
+import { useSelector } from 'react-redux'
 
 export default function ContactList() {
 
     // assign contacts to contactState
-    var contactState = [{ fname: "David", lname: "Smith", email: "dsmith@email.com", comment: "Dave''s mobile: 555-523-7456" },
-    { fname: "Mary", lname: "Klien", email: "mary34@email.com", comment: "Help her with project" },
-    { fname: "Frank", lname: "McDonald", email: "frankmac@email.com", comment: "home address - 123 main st. happytown, usa" }];
+    const contactState = useSelector(state => state.contacts);
 
     function contactTable(contacts) {
         if (contacts.length === 0) {
