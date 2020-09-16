@@ -13,7 +13,6 @@ export default function Tasks() {
     const filter = useSelector(state => state.filter);
     const dispatch = useDispatch();
 
-
     // local states
     const [taskState, setState] = useState([]);
     const [filterState, setFilter] = useState([]);
@@ -21,7 +20,12 @@ export default function Tasks() {
     // state hooks
     useEffect(() => {
         console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
+        console.log('USEEFFECT() redux store = ' + JSON.stringify(tasks));
         setFilter(taskState);
+
+        //var task = { id: todoID, desc: taskRef.current.value, complete: false };
+       //dispatch(addTask(task))
+
     }, [taskState]);
 
     useEffect(() => {
@@ -47,13 +51,18 @@ export default function Tasks() {
     // handle add new task
     const addTask = () => {
         if (taskRef.current.value !== '') {
-            setState([...taskState, { id: todoID, desc: taskRef.current.value, complete: false }]);
+            var task = { id: todoID, desc: taskRef.current.value, complete: false };
+            setState([...taskState, task])
             taskRef.current.value = '';
-            dispatch(addTask())
+
+            //var task = { id: todoID, desc: taskRef.current.value, complete: false };
+            //dispatch(addTask(task))
+            
         }
         else {
             alert("Please enter a task")
         }
+
     }
 
     // handle enter key press
@@ -64,15 +73,16 @@ export default function Tasks() {
     }
 
     // checkbox element condidtional
-    const checkbox = (task, index) => (
+    const checkbox = (task, taskId) => (
         (task.complete) ?
-            (<input type="checkbox" onClick={(e) => handleChecked(e, index)} value={task.desc} defaultChecked />) :
-            (<input type="checkbox" onClick={(e) => handleChecked(e, index)} value={task.desc} />)
+            (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} defaultChecked />) :
+            (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} />)
     )
 
     // mark checked task as completed
-    const handleChecked = (e, index) => {
+    const handleChecked = (taskId) => {
         const tempState = [...taskState];
+        const index = taskState.findIndex(task => task.id === taskId);
         tempState[index] = { id: taskState[index].id, desc: taskState[index].desc, complete: !taskState[index].complete };
         setState(tempState);
     }
@@ -116,7 +126,7 @@ export default function Tasks() {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
-                                            {checkbox(task, index)}
+                                            {checkbox(task, task.id)}
                                         </div>
                                     </div>
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
