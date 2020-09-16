@@ -12,10 +12,23 @@ export default function Tasks() {
 
     // store selectors and dispatch
     const taskState = useSelector(state => state.tasks);
+    const filterState = useSelector(state => state.taskFilter);
     const dispatch = useDispatch();
 
     // variables
     const taskRef = useRef();
+
+    // get tasks list from store
+    function getTasks() {
+        if (filterState === 'all') {
+            return taskState
+        }
+        if (filterState === 'active') {
+            return taskState.filter(task => !task.complete);
+        }
+        if (filterState === 'complete')
+            return taskState.filter(task => task.complete);
+    }
 
     // handle add new task
     const taskClick = () => {

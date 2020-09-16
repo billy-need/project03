@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React from 'react'
 import '../App.css';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, setFilter } from '../redux/actions';
+import { setFilter } from '../redux/actions';
 
 export default function FilterOptions() {
 
     // store selectors and dispatch
-    const taskState = useSelector(state => state.tasks);
     const filterState = useSelector(state => state.taskFilter);
     const dispatch = useDispatch();
 
@@ -15,13 +14,12 @@ export default function FilterOptions() {
         switch (e.target.value) {
             case 'active':
                 dispatch(setFilter('active'));
-                return taskState.filter(task => !task.complete);
+                break;
             case 'complete':
                 dispatch(setFilter('complete'));
-                return taskState.filter(task => task.complete);
+                break;
             default:
                 dispatch(setFilter('all'));
-                return taskState;
         }
     }
 
