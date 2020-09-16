@@ -3,6 +3,7 @@ import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
 import { addTask, deleteTask, completeTask, setFilter } from '../redux/actions';
+import DeleteBtn from './DeleteBtn';
 
 
 export default function Tasks() {
@@ -79,16 +80,6 @@ export default function Tasks() {
         setState(tempState);
     }
 
-    // delete task from task state
-    const handleDelete = (taskId) => {
-
-        dispatch(deleteTask(taskId));
-
-        console.log("DELETE taskId=" + taskId);
-        let tempState = taskState.filter(task => task.id !== taskId);
-        setState(tempState);
-    }
-
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -117,7 +108,7 @@ export default function Tasks() {
                 <div id="taskOutput" className="form-row">
                     <div className="form-group col-md-12">
                         {
-                            filterState.map((task, index) => {
+                            tasks.map((task, index) => {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
@@ -125,9 +116,7 @@ export default function Tasks() {
                                         </div>
                                     </div>
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
-                                    <div className="input-group-append">
-                                        <button className="btn btn-outline-danger" type="button" onClick={() => handleDelete(task.id)}>Delete</button>
-                                    </div>
+                                    <DeleteBtn id={task.id} />
                                 </div>
                             })
                         }
