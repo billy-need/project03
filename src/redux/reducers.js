@@ -5,11 +5,11 @@ import { combineReducers } from 'redux';
 export const tasksReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_TASK:
-            return [...state.tasks, action.task];
+            return [...state.tasks, {id: action.id, desc: action.desc, complete: false}];
         case DELETE_TASK:
             return state.filter(task => task.id !== action.id);
         case COMPLETE_TASK:
-            return [...state.tasks, !action.task.complete];
+            return state.map(task => (task.id === action.id) ? {...task, complete: !task.complete} : task);
         default:
             return state;
     }
