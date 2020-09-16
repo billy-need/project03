@@ -2,10 +2,9 @@ import React, { useRef } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask } from '../redux/actions';
+import { addTask, setFilter } from '../redux/actions';
 import DeleteBtn from './DeleteBtn';
 import Checkbox from './Checkbox';
-import FilterOptions from './FilterOptions';
 
 
 export default function Tasks() {
@@ -17,18 +16,6 @@ export default function Tasks() {
 
     // variables
     const taskRef = useRef();
-
-    // get tasks list from store
-    function getTasks() {
-        if (filterState === 'all') {
-            return taskState
-        }
-        if (filterState === 'active') {
-            return taskState.filter(task => !task.complete);
-        }
-        if (filterState === 'complete')
-            return taskState.filter(task => task.complete);
-    }
 
     // handle add new task
     const taskClick = () => {
@@ -50,6 +37,34 @@ export default function Tasks() {
         }
     }
 
+    // set filter state
+    const setFilterOptions = (e) => {
+        if (e.target.value === 'all') {
+            dispatch(setFilter('all'));
+        }
+        else if (e.target.value === 'active') {
+            dispatch(setFilter('active'));
+        }
+        else if (e.target.value === 'complete') {
+            dispatch(setFilter('complete'));
+        }
+    }
+
+    // get tasks list from store
+    function getTasks(tasks) {
+        // let tasks = [];
+        if (filterState === 'all') {
+            tasks = taskState;
+        }
+        if (filterState === 'active') {
+            tasks = taskState.filter(task => !task.complete);
+        }
+        if (filterState === 'complete') {
+            tasks = taskState.filter(task => task.complete);
+        }
+        return tasks;
+    }
+
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -65,14 +80,20 @@ export default function Tasks() {
                         </div>
                     </div>
                 </div>
-                <FilterOptions />
+                <div className="form-group col-md-4">
+                    <select className="custom-select mr-sm-2 form-control" id="filter" value={filterState.taskFilter} onChange={setFilterOptions}>
+                        <option value="all" >All</option>
+                        <option value="active" >Active</option>
+                        <option value="complete">Completed</option>
+                    </select>
+                </div>
             </div>
             <hr />
             <div id="content-wrap">
                 <div id="taskOutput" className="form-row">
                     <div className="form-group col-md-12">
                         {
-                            taskState.map((task, index) => {
+                            getTasks(taskState).map((task, index) => {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
                                     <Checkbox task={task} id={task.id} />
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
