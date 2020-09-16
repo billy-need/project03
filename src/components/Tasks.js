@@ -1,57 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, completeTask, setFilter } from '../redux/actions';
+import { addTask } from '../redux/actions';
 import DeleteBtn from './DeleteBtn';
 import Checkbox from './Checkbox';
+import FilterOptions from './FilterOptions';
 
 
 export default function Tasks() {
 
     // store selectors and dispatch
-    const tasks = useSelector(state => state.tasks);
-    const taskFilter = useSelector(state => state.taskFilter);
+    const taskState = useSelector(state => state.tasks);
     const dispatch = useDispatch();
-
-    // local states
-    const [taskState, setState] = useState([]);
-    const [filterState, setFilter] = useState([]);
-
-    // use effects
-    useEffect(() => {
-        console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
-        //setFilter(taskState); //this could be an issue with filter
-    }, [taskState]);
-
-    useEffect(() => {
-        console.log('USEEFFECT() filter state = ' + JSON.stringify(filterState));
-    }, [filterState]);
 
     // variables
     const taskRef = useRef();
 
-
-    // filter task list
-    const filterTasks = (e) => {
-        switch (e.target.value) {
-            case 'active':
-                return setFilter(taskState.filter(task => !task.complete));
-            case 'complete':
-                return setFilter(taskState.filter(task => task.complete));
-            default:
-                return setFilter(taskState);
-        }
-    }
-
     // handle add new task
     const taskClick = () => {
         let todoID = uuid();
-
         if (taskRef.current.value !== '') {
             let task = { id: todoID, desc: taskRef.current.value, complete: false }
             dispatch(addTask(task));
-            setState([...taskState, task])
             taskRef.current.value = '';
         }
         else {
@@ -81,20 +52,14 @@ export default function Tasks() {
                         </div>
                     </div>
                 </div>
-                <div className="form-group col-md-4">
-                    <select className="custom-select mr-sm-2 form-control" id="filter" value={filterState.complete} onChange={filterTasks}>
-                        <option value="all" >All</option>
-                        <option value="active" >Active</option>
-                        <option value="complete">Completed</option>
-                    </select>
-                </div>
+                <FilterOptions />
             </div>
             <hr />
             <div id="content-wrap">
                 <div id="taskOutput" className="form-row">
                     <div className="form-group col-md-12">
                         {
-                            tasks.map((task, index) => {
+                            taskState.map((task, index) => {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
                                     <Checkbox task={task} id={task.id} />
                                     <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
