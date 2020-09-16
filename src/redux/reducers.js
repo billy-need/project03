@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 export const tasksReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_TASK:
-            return [...state.tasks, {id: action.id, desc: action.desc, complete: false}];
+            return [...state, action.task];
         case DELETE_TASK:
             return state.filter(task => task.id !== action.id);
         case COMPLETE_TASK:
@@ -19,17 +19,17 @@ export const tasksReducer = (state = [], action) => {
 export const contactsReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_CONTACT:
-            return [...state.contacts, action.contact];
+            return [...state, action.contact];
         default:
             return state;
     }
 }
 
 //filter reducer
-export const filterReducer = (state = [], action) => {
+export const filterReducer = (state = {taskFilter: 'all'}, action) => {
     switch (action.type) {
         case SET_FILTER:
-            return [...state.taskFilter, action.taskFilter];
+            return ({taskFilter: action.taskFilter});
         default:
             return state;
     }

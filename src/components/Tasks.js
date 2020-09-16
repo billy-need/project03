@@ -2,30 +2,24 @@ import React, { useState, useRef, useEffect } from 'react'
 import '../App.css';
 import { uuid } from 'uuidv4';
 import { useSelector, useDispatch } from 'react-redux'
-import { tasksReducer, filterReducer } from '../redux/reducers';
-import { addTask } from '../redux/actions';
+import { addTask, deleteTask, completeTask, setFilter } from '../redux/actions';
 
 
 export default function Tasks() {
 
     // store selectors and dispatch
     const tasks = useSelector(state => state.tasks);
-    const filter = useSelector(state => state.filter);
+    const taskFilter = useSelector(state => state.taskFilter);
     const dispatch = useDispatch();
 
     // local states
     const [taskState, setState] = useState([]);
     const [filterState, setFilter] = useState([]);
 
-    // state hooks
+    // use effects
     useEffect(() => {
         console.log('USEEFFECT() task state = ' + JSON.stringify(taskState));
-        console.log('USEEFFECT() redux store = ' + JSON.stringify(tasks));
-        setFilter(taskState);
-
-        //var task = { id: todoID, desc: taskRef.current.value, complete: false };
-       //dispatch(addTask(task))
-
+        setFilter(taskState); //this could be an issue with filter
     }, [taskState]);
 
     useEffect(() => {
@@ -34,7 +28,7 @@ export default function Tasks() {
 
     // variables
     const taskRef = useRef();
-    let todoID = uuid();
+    
 
     // filter task list
     const filterTasks = (e) => {
@@ -49,26 +43,24 @@ export default function Tasks() {
     }
 
     // handle add new task
-    const addTask = () => {
+    const taskClick = () => {
+        let todoID = uuid();
+        
         if (taskRef.current.value !== '') {
-            var task = { id: todoID, desc: taskRef.current.value, complete: false };
+            let task = { id: todoID, desc: taskRef.current.value, complete: false }
+            dispatch(addTask(task));
             setState([...taskState, task])
             taskRef.current.value = '';
-
-            //var task = { id: todoID, desc: taskRef.current.value, complete: false };
-            //dispatch(addTask(task))
-            
         }
         else {
             alert("Please enter a task")
         }
-
     }
 
     // handle enter key press
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            addTask();
+            taskClick();
         }
     }
 
@@ -89,6 +81,9 @@ export default function Tasks() {
 
     // delete task from task state
     const handleDelete = (taskId) => {
+
+        dispatch(deleteTask(taskId));
+
         console.log("DELETE taskId=" + taskId);
         let tempState = taskState.filter(task => task.id !== taskId);
         setState(tempState);
@@ -103,9 +98,9 @@ export default function Tasks() {
             <div className="form-row">
                 <div className="form-group col-md-8">
                     <div className="input-group">
-                        <input id="taskInput" className="form-control" type="text" placeholder="New task..." aria-label="Type task" ref={taskRef} onKeyDown={handleKeyDown} />
+                        <input id="taskInput" className="form-control" type="text" placeholder="New task..." aria-label="Type task" ref={taskRef} onKeyDown={handleKeyDown} required />
                         <div className="input-group-append">
-                            <button className="btn btn-success" onClick={addTask}>Add Task</button>
+                            <button className="btn btn-success" onClick={taskClick}>Add Task</button>
                         </div>
                     </div>
                 </div>
