@@ -88,10 +88,8 @@ table {
   border: none;
 }
 
-#taskDesc {
-  padding: 1rem;
-  margin: 2rem;
-  width: 3rem;
+.completed {
+  text-decoration: line-through;
 }
 
 #taskOutput {

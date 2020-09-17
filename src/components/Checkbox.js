@@ -8,10 +8,10 @@ export default function Checkbox(props) {
         const dispatch = useDispatch();
 
         // checkbox element condidtional
-        const checkbox = (task, taskId) => (
-            (task.complete) ?
-                (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} defaultChecked />) :
-                (<input type="checkbox" onClick={() => handleChecked(taskId)} value={task.desc} />)
+        const checkbox = (complete, taskId) => (
+            (complete) ?
+                (<input type="checkbox" onClick={() => handleChecked(taskId)} defaultChecked />) :
+                (<input type="checkbox" onClick={() => handleChecked(taskId)} />)
         )
     
         // mark checked task as completed
@@ -22,7 +22,7 @@ export default function Checkbox(props) {
     return (
         <div className="input-group-prepend">
             <div className="input-group-text">
-                {checkbox(props.task, props.id)}
+                {checkbox(props.complete, props.id)}
             </div>
         </div>
     )

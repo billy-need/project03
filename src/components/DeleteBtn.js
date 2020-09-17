@@ -8,9 +8,7 @@ export default function DeleteBtn(props) {
     const dispatch = useDispatch();
 
     const handleDelete = (taskId) => {
-
         dispatch(deleteTask(taskId));
-
     }
 
     return (

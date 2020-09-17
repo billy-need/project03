@@ -14,6 +14,7 @@ export default function Tasks() {
     const filterState = useSelector(state => state.taskFilter);
     const dispatch = useDispatch();
 
+
     // variables
     const taskRef = useRef();
 
@@ -50,19 +51,17 @@ export default function Tasks() {
         }
     }
 
-    // get tasks list from store
-    function getTasks(tasks) {
-        // let tasks = [];
-        if (filterState === 'all') {
-            tasks = taskState;
+    const getTasks = (tasks, filter) => {
+        switch (filter.taskFilter) {
+            case 'all':
+                return tasks;
+            case 'active':
+                return tasks.filter(task => !task.complete);
+            case 'complete':
+                return tasks.filter(task => task.complete);
+            default:
+                return;
         }
-        if (filterState === 'active') {
-            tasks = taskState.filter(task => !task.complete);
-        }
-        if (filterState === 'complete') {
-            tasks = taskState.filter(task => task.complete);
-        }
-        return tasks;
     }
 
     return (
@@ -93,10 +92,10 @@ export default function Tasks() {
                 <div id="taskOutput" className="form-row">
                     <div className="form-group col-md-12">
                         {
-                            getTasks(taskState).map((task, index) => {
+                          getTasks(taskState, filterState).map((task, index) => {
                                 return <div className="input-group mb-3" key={index} id={task.id}>
-                                    <Checkbox task={task} id={task.id} />
-                                    <span className="form-control" style={{ textDecoration: task.complete ? 'line-through' : 'none' }}>{task.desc}</span>
+                                    <Checkbox complete={task.complete} id={task.id} />
+                                    <span className={task.complete ? "form-control completed" : "form-control" }>{task.desc}</span>
                                     <DeleteBtn id={task.id} />
                                 </div>
                             })
